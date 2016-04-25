@@ -31,6 +31,11 @@ docker build --tag xsh/wmq75:0.2 .
 docker run -d -p 1414:1414 --name wmq xsh/wmq75:0.2
 ```
 
+4. 如果要自定义队列管理器，可以仿照start_queue_manager.sh写一个自己的配置文件(如some_queue_manager.sh)，启动时加载即可
+```
+docker run -d -p <yourport>:<yourport> -v $PWD/some_queue_manager.sh:/start_queue_manager.sh --name wmq xsh/wmq75:0.2
+```
+
 ##使用MQ Explorer测试队列
 1. 使用MQ的Windows介质安装MQ Explorer，并启动
 2. 左侧菜单中在Queue Managers右键，选择Add Remote Queue Manager...
