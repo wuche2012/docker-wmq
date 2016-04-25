@@ -16,6 +16,7 @@ docker run -it -v $PWD:/tmp/software centos:7.1.1503 /bin/bash
 ```
 docker commit wmq_container xsh/wmq75:0.1
 ```
+
 ##制作可以提供服务的MQ image
 1. 请在以下地址下载相关的配置脚本
 [http://git.oschina.net/gongxusheng/docker-wmq](http://git.oschina.net/gongxusheng/docker-wmq)
