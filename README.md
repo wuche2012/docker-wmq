@@ -42,9 +42,13 @@ docker run -d -p 1414:1414 --name wmq xsh/wmq75:0.2
 由于Dockerfile安装时无法有效的删除安装介质，会导致做出的image过大，所以笔者使用了人工安装的方法。有兴趣的读者可以试试Dockerfile2，做出的image要927MB，比前文所述方法做出的Image要大约500MB
 ##关于操作系统参数的优化
 MQ安装步骤中有一步要求su mqm -c "/opt/mqm/bin/mqconfig"，检查MQ的执行环境符合最小要求。结合Docker Engine的特点，可以在运行Docker Engine的服务器做相应的配置，Docker容器启动时即会带入相关的参数。
+
 1. 执行```docker exec -it wmq /bin/bash```，进入Docker容器
+
 2. 执行 ```su mqm -c "/opt/mqm/bin/mqconfig```", 查看哪些参数需要设置
+
 3. 如果提示mqconfig: The bc program was not found on this system. 执行 yum install -y bc 安装bc
+
 4. 按照mqconfig的提示信息设置操作系统参数，如笔者的环境提示以下的Fail
 ```
 System V Semaphores
@@ -70,6 +74,7 @@ net.ipv4.tcp_keepalive_time = 300
 mqm    soft    nofile    10240
 mqm    hard    nofile    10240
 ```
+
 5. (在运行Docker Engine的服务器 ) 执行 sysctl -p 后启动一个新的容器，再次执行 su mqm -c "/opt/mqm/bin/mqconfig" 检查，全部通过即设置成功
 
 
