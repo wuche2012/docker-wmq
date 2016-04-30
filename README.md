@@ -47,8 +47,8 @@ docker run -d -p <yourport>:<yourport> -v $PWD/some_queue_manager.sh:/start_queu
 由于Dockerfile安装时无法有效的删除安装介质，会导致做出的image过大，所以笔者使用了人工安装的方法。有兴趣的读者可以试试Dockerfile2，做出的image要927MB，比前文所述方法做出的Image要大约500MB
 ##关于操作系统参数的优化
 MQ安装步骤中有一步要求su mqm -c "/opt/mqm/bin/mqconfig"，检查MQ的执行环境符合最小要求，不符合最小要求则可能无法启动队列管理器。结合Docker Engine的特点，可以在运行Docker Engine的服务器做相应的配置，Docker容器启动时即会带入相关的参数。
-_说明_：经过测试，修改运行Docker Engine服务器系统参数的方法在Ubuntu Server 14.04.4 LTS
- 64bit + Docker 1.10.有效果；在Cent 6.5 + Docker 1.7.1没有效果。如果哪位读者知道在Docker 1.7.1上的设置方法，请给我留言
+
+_说明_：经过测试，修改运行Docker Engine服务器系统参数的方法在Ubuntu Server 14.04.4 LTS 64bit + Docker 1.10.有效果；在Cent 6.5 + Docker 1.7.1没有效果。如果哪位读者知道在Docker 1.7.1上的设置方法，请给我留言
 
 1. 执行```docker exec -it wmq /bin/bash```，进入Docker容器
 
